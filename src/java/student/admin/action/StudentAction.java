@@ -1,0 +1,68 @@
+package student.admin.action;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class StudentAction extends ActionSupport implements
+		ServletRequestAware, ServletResponseAware, SessionAware {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	HttpServletRequest request;
+	HttpServletResponse response;
+	Map<String, Object> session;
+
+	public String gotoHomePage() {
+		return SUCCESS;
+
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+
+	}
+
+	@Override
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+
+	}
+
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+	public HttpServletResponse getResponse() {
+		return response;
+	}
+
+	public void setResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+}

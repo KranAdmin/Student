@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="student.admin.vo.StudentDataBean" table="student_details" lazy="false">
+		<id name="id" column="id" type="integer"
+			unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		    <property name="name" column="name" type="string" not-null="false"
+			lazy="false" />
+			<property name="age" column="age" type="integer" not-null="false"
+			lazy="false" />
+			<property name="department" column="department" type="string" not-null="false"
+			lazy="false" />
+			<!-- <many-to-one name="ddo" cascade="lock" column="ddo_Id" class="probityfinancials.eis.vo.DdoSetup" not-null="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		
+		<many-to-one name="treasury" cascade="lock" column="treasury_Id" class="probityfinancials.eis.vo.TreasurySetup" not-null="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		 -->
+	</class>
+</hibernate-mapping>

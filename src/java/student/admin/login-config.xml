@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="sessioncheck" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<interceptors>
+			<interceptor name="session"
+				class="student.admin.action.sessionExpiredAction" />
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+				</interceptor-ref>
+				<interceptor-ref name="session" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="adminStack"></default-interceptor-ref>
+		<global-results>
+			<result name="securityerror">/sessionexpired.jsp</result>
+			<result name="error">/error.jsp</result>
+			<result name="session">/sessionexpired.jsp</result>
+			<result name="Exception">/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping
+				exception="org.apache.struts.register.exceptions.SecurityBreachException"
+				result="securityerror" />
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+	</package>
+
+	<package name="login" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<action name="login" class="student.admin.action.LoginAction">
+			<result name="success" type="redirectAction">studentList</result>
+			<result name="input">/index.jsp</result>
+		</action>
+	</package>
+
+	<package name="studentDataBase" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+				<action name="studentList" method="getStudentsList"
+			class="student.admin.action.CreateAction">
+			<result name="success" type="tiles">gotoHomePage</result>
+			<result name="input" type="redirectAction">studentList</result>
+		</action>
+		<action name="create" method="addStudentList"
+			class="student.admin.action.CreateAction">
+			<result name="success" type="redirectAction">studentList</result>
+		</action>
+		<action name="deleteStudent" method="deleteStudent"
+			class="student.admin.action.CreateAction">
+			<result name="success" type="redirectAction">studentList</result>
+		</action>
+		<action name="getStudent" method="getStudentEdit"
+			class="student.admin.action.CreateAction">
+			<result name="success" type="tiles">gotoHomePage</result>
+		</action>
+	</package>
+	
+	<package name="logout" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<action name="logout"
+			class="student.admin.action.LogoutAction">
+			<result name="success">/index.jsp</result>
+		</action>
+	</package>
+</struts>
